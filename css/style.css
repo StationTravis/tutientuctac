@@ -175,45 +175,7 @@
         .sidebar-right {
             flex: 1.2; 
             height: fit-content;
-        }
-
-        /* Nút Chơi Game - Đã giảm độ chói màu đỏ */
-        .play-game-button {
-            width: 100%;
-            max-width: 100px; 
-            height: 100px;
-            background-color: #a8362a; /* Màu đỏ đậm, ít chói hơn */
-            border-radius: 50%; 
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 0 auto 30px auto;
-            border: 5px solid #d45f50; /* Viền đỏ sáng hơn một chút */
-            box-shadow: 0 0 30px rgba(168, 54, 42, 0.8), inset 0 0 15px rgba(255,255,255,0.2); /* Thêm inset shadow */
-            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
-        }
-        .play-game-button:hover {
-            transform: scale(1.1); 
-            box-shadow: 0 0 45px rgba(168, 54, 42, 1), inset 0 0 20px rgba(255,255,255,0.3);
-        }
-
-        .play-game-button a {
-            color: #ffffff;
-            font-size: 38px; /* Chữ to hơn nữa */
-            font-weight: bold;
-            text-align: center;
-            line-height: 1.2;
-            text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.7); /* Bóng chữ mạnh hơn */
-            font-family: 'Oswald', sans-serif; /* Dùng font Oswald */
-        }
-        .play-game-button a:hover {
-            text-decoration: none;
-        }
-		.play-game-button a img {
-			width: 250px;  /* <--- Kích thước chiều ngang của logo/icon */
-			height: 250px; /* <--- Kích thước chiều dọc của logo/icon */
 		}
-
         /* Khung Đăng Nhập */
         .login-form {
             padding: 25px;
@@ -264,7 +226,7 @@
             color: #ffffff;
             border: none;
             border-radius: 5px;
-            font-size: 1.2em; 
+            font-size: 1.05em; 
             font-weight: bold;
             cursor: pointer;
             transition: background-color 0.3s, transform 0.2s, box-shadow 0.2s;
@@ -297,54 +259,36 @@
 /* Áp dụng cho màn hình có chiều rộng tối đa 992px (Tablet, Mobile) */
 @media (max-width: 992px) {
     
-    /* Điều chỉnh padding tổng thể của body trên mobile */
-    body {
-        padding: 0 10px;
-    }
-
-    /* Chuyển container từ 3 cột sang 1 cột xếp dọc */
+    /* Cấu trúc cơ bản - KHÔNG THAY ĐỔI */
+    body { padding: 0 10px; }
     .container {
         flex-direction: column;
-        gap: 20px; /* Giảm khoảng cách giữa các khối */
+        gap: 20px; 
         margin: 10px auto;
     }
-
-    /* Tối ưu header */
-	.header img {
-		max-width: 75px; 
-		height: auto;
-		filter: drop-shadow(0 0 18px rgba(0, 255, 255, 0.7)) drop-shadow(0 0 35px rgba(0, 255, 255, 0.5)); 
-	}
-    /* Reset flex properties để các khối chiếm 100% chiều rộng */
+    .header img { max-width: 70%; }
     .sidebar-left, 
     .main-content, 
     .sidebar-right {
         flex: 1 1 100%;
+        /* QUAN TRỌNG: Thêm margin bottom để tách các khối */
+        margin-bottom: 20px; 
     }
     
-    /* THAY ĐỔI THỨ TỰ: Đẩy Cột Phải (Nút Chơi Game + Đăng Nhập) lên trên cùng */
-    .sidebar-right {
-        order: -1; 
-    }
-    
-    /* Sidebar trái và Main Content ở giữa */
-    .sidebar-left {
-        order: 0;
-    }
+    /* ĐẢM BẢO THỨ TỰ VẪN ĐÚNG */
+    .sidebar-right { order: -1; } /* Login/User Menu lên đầu */
+    .sidebar-left { order: 0; }
+    .main-content { order: 1; }
 
+    /* THÊM QUY TẮC NÀY ĐỂ TẠO KHOẢNG CÁCH DƯỚI LOGO */
+    .header {
+        margin-bottom: 20px; /* Thêm khoảng cách dưới Logo */
+        padding-bottom: 0;
+    }
+    
+    /* Loại bỏ khoảng cách thừa cuối trang */
     .main-content {
-        order: 1;
-    }
-
-    /* Đảm bảo nút Chơi Game vẫn hiển thị hợp lý */
-    .play-game-button {
-        max-width: 180px; 
-        height: 180px;
-        margin: 0 auto 20px auto; /* Căn giữa và giảm khoảng cách */
-    }
-
-    .play-game-button a {
-        font-size: 30px; /* Giảm cỡ chữ nút Chơi Game */
+        margin-bottom: 0; /* Khối cuối cùng không cần margin dưới */
     }
 
     /* Tiêu đề trên mobile nên nhỏ lại chút */
@@ -355,16 +299,7 @@
 
 /* Áp dụng cho màn hình rất nhỏ (như iPhone SE) */
 @media (max-width: 480px) {
-    .play-game-button {
-        max-width: 140px; 
-        height: 140px;
-    }
-
-    .play-game-button a {
-        font-size: 26px;
-    }
-    
-    /* Giảm padding của các khối nội dung trên màn hình cực nhỏ */
+ /* Giảm padding của các khối nội dung trên màn hình cực nhỏ */
     .glass-panel {
         padding: 15px;
     }
@@ -381,7 +316,7 @@
 
 .user-menu h4 {
     margin-top: 0;
-    margin-bottom: 25px;
+    margin-bottom: 0px;
     font-size: 1.2em;
     color: #FFFF99; /* Màu vàng kim loại */
     text-shadow: 1px 1px 3px rgba(0,0,0,0.8);
@@ -391,20 +326,22 @@
 .user-nav ul {
     list-style-type: none;
     padding: 0;
-    margin: 0 0 20px 0;
+    margin: 0 0 5px 0;
 }
 
 .user-nav li a {
     display: block;
-    padding: 15px 20px;
+    padding: 8px 20px;
     color: #f0f0f0;
     background-color: rgba(42, 42, 74, 0.5);
-    margin-bottom: 10px;
+    margin-bottom: 5px;
     border-radius: 8px; 
     font-weight: bold;
     transition: background-color 0.3s;
 }
-
+.user-nav li.play-game-li {
+    margin: 0px 0; /* <--- Sửa 10px thành 5px (hoặc 0px) */
+}
 .user-nav li a:hover {
     background-color: rgba(58, 58, 90, 0.6);
 }
@@ -420,7 +357,53 @@
     cursor: pointer;
     transition: background-color 0.3s;
 }
+/* Nút Chơi Game giờ chỉ là cái icon */
+.game-action-button {
+    /* Xóa nền xanh và viền */
+    background: none;
+    border: none;
+    
+    /* Xóa đệm và bóng đổ */
+    padding: 0;
+    box-shadow: none;
 
+    /* Tự động co lại theo kích thước icon */
+    width: auto; 
+    
+    /* Căn giữa icon trong khung */
+    display: block;
+    margin: 20px auto; /* Tăng khoảng cách trên dưới để cho đẹp */
+    
+    /* Hiệu ứng khi di chuột */
+    cursor: pointer;
+    transition: transform 0.2s ease;
+}
+
+/* Thêm hiệu ứng phóng to khi di chuột vào icon */
+.game-action-button:hover {
+    transform: scale(1.2); /* Phóng to 120% */
+}
 .logout-button:hover {
     background-color: #5c1b14;
+}
+
+/* Điều chỉnh lại nút Đăng Xuất */
+#logoutButton {
+    background-color: #dc3545; /* Màu đỏ tiêu chuẩn */
+}/* Styling cho icon Play Game bên trong nút */
+/* Tăng kích thước cho icon */
+.play-icon-img {
+    width: 400px; /* Kích thước mới, mày có thể chỉnh (ví dụ: 50px, 70px) */
+    height: 150px;
+    vertical-align: middle; /* Giữ nguyên */
+    /* margin-right: 0; */ /* Không cần nữa vì đã xóa ở bước trước */
+    
+    /* Tăng hiệu ứng phát sáng cho icon */
+    filter: drop-shadow(0 0 8px rgba(0, 255, 255, 0.9)); 
+    transition: filter 0.2s ease;
+}
+
+/* Thêm hiệu ứng cho icon khi nút được hover */
+.game-action-button:hover .play-icon-img {
+    filter: drop-shadow(0 0 15px rgba(0, 255, 255, 1)); /* Sáng rực lên */
 }

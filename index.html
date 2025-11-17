@@ -73,10 +73,6 @@
         </main>
 
         <aside class="sidebar-right">
-            
-			<div class="play-game-button">
-				<a href="#"><img src="IMG/play-icon.png" alt="Play Game"></a>
-			</div>
 
            <form class="login-form glass-panel" id="loginForm">
                 <h4>Đăng Nhập</h4>
@@ -94,8 +90,11 @@
                     <a href="#">Quên Mật Khẩu?</a>
                 </div>
             </form>
-				<div class="user-menu glass-panel" id="userMenu">
+				<div class="user-menu glass-panel" id="userMenu" style="display: none;">
 					<h4>Căn Cước của Đạo Hữu</h4>
+					<button id="playGameButton" class="btn-primary game-action-button" title="Bắt đầu chơi game">
+						<img src="IMG/play-icon.png" alt="Play Icon" class="play-icon-img"> 
+					</button>
 					<nav class="user-nav">
 						<ul>
 							<li><a href="#" data-menu="account">Tài Khoản</a></li>
@@ -116,65 +115,61 @@
         // CÁC BIẾN CHUNG
         const navLinks = document.querySelectorAll('.nav-link');
         const tabContents = document.querySelectorAll('.tab-content');
-        const playButton = document.querySelector('.play-game-button a');
+        // const playButton = document.querySelector('.play-game-button a'); // Dòng này bị XÓA
         
-        const loginForm = document.getElementById('loginForm'); // Khung đăng nhập
-        const userMenu = document.getElementById('userMenu');   // Khung menu sau login
+        const loginForm = document.getElementById('loginForm');
+        const userMenu = document.getElementById('userMenu');
         const logoutButton = document.getElementById('logoutButton');
-        const submitButton = loginForm.querySelector('button[type="submit"]'); // Nút Đăng Nhập
+        const submitButton = loginForm.querySelector('button[type="submit"]'); 
+
+        // BIẾN MỚI CHO NÚT CHƠI GAME
+        const playGameButton = document.getElementById('playGameButton');
         
         const mainGamePage = 'main-game.html'; 
 
         // =================================
-        // 1. CHỨC NĂNG CHUYỂN TAB (GIỮ NGUYÊN)
+        // 1. CHỨC NĂNG CƠ BẢN VÀ LƯU TRẠNG THÁI
         // =================================
-        navLinks.forEach(function(link) {
-            link.addEventListener('click', function(event) {
-                event.preventDefault(); 
-                // ... (logic chuyển tab cũ)
-                const targetTabId = link.getAttribute('data-tab');
-                const targetTab = document.getElementById(targetTabId);
-
-                navLinks.forEach(function(navLink) {
-                    navLink.classList.remove('active');
-                });
-
-                tabContents.forEach(function(tab) {
-                    tab.classList.remove('active');
-                });
-
-                link.classList.add('active');
-
-                if (targetTab) {
-                    targetTab.classList.add('active');
-                }
-            });
-        });
-
-
-        // =================================
-        // 2. CHỨC NĂNG CHUYỂN ĐỔI MENU (MỚI)
-        // =================================
-        function handleLoginSuccess() {
-            // Ẩn form Đăng Nhập
+        
+        function showUserMenu() {
             loginForm.style.display = 'none';
-            // Hiện Menu Người Dùng
             userMenu.style.display = 'block';
-            
-            // Xóa nội dung input để bảo mật (giả định)
+            localStorage.setItem('isLoggedIn', 'true'); 
+        }
+
+        function showLoginForm() {
+            loginForm.style.display = 'block';
+            userMenu.style.display = 'none';
+            localStorage.setItem('isLoggedIn', 'false');
+        }
+
+        function handleLoginSuccess() {
             document.getElementById('username').value = '';
             document.getElementById('password').value = '';
-            
             alert('✅ Đăng nhập thành công! Chào mừng Đạo Hữu!');
+            showUserMenu();
         }
 
         function handleLogout() {
-            // Hiện form Đăng Nhập
-            loginForm.style.display = 'block';
-            // Ẩn Menu Người Dùng
-            userMenu.style.display = 'none';
+            showLoginForm();
             alert('Đã đăng xuất.');
         }
+
+        // =================================
+        // 2. CHỨC NĂNG KIỂM TRA TRẠNG THÁI KHI LOAD TRANG
+        // =================================
+        
+        function checkLoginStateOnLoad() {
+            const loggedIn = localStorage.getItem('isLoggedIn');
+            
+            if (loggedIn === 'true') {
+                showUserMenu();
+            } else {
+                showLoginForm(); 
+            }
+        }
+        
+        checkLoginStateOnLoad();
 
 
         // =================================
@@ -183,28 +178,39 @@
 
         // A. Xử lý nút Đăng Nhập (Bấm bất cứ gì cũng login)
         submitButton.addEventListener('click', function(event) {
-            event.preventDefault(); // Ngăn form gửi đi
-
-            // Bất kể input có gì, vẫn coi là thành công
+            event.preventDefault(); 
             handleLoginSuccess();
         });
 
-        // B. Xử lý nút Chơi Game
-        playButton.addEventListener('click', function(event) {
-            event.preventDefault(); // Ngăn chuyển trang mặc định
-
-            // Kiểm tra trạng thái: Nếu menu đăng nhập bị ẩn (tức là đã login) thì vào game
-            if (userMenu.style.display === 'block') {
-                window.location.href = mainGamePage; 
-            } else {
-                alert('⚠️ Vui lòng Đăng Nhập trước khi chơi game!');
-                document.getElementById('username').focus();
-            }
+        // B. Xử lý nút CHƠI GAME (NÚT MỚI)
+        playGameButton.addEventListener('click', function(event) {
+            event.preventDefault(); 
+            
+            // Vì nút này chỉ hiện khi Đã Login nên chỉ cần chuyển trang
+            alert('Đang chuyển vào Game...');
+            window.location.href = mainGamePage; 
         });
         
         // C. Xử lý nút Đăng Xuất
         logoutButton.addEventListener('click', handleLogout);
 
+        // =================================
+        // 4. CHỨC NĂNG CHUYỂN TAB (GIỮ NGUYÊN)
+        // =================================
+        navLinks.forEach(function(link) {
+            link.addEventListener('click', function(event) {
+                event.preventDefault(); 
+                const targetTabId = link.getAttribute('data-tab');
+                const targetTab = document.getElementById(targetTabId);
+
+                navLinks.forEach(function(navLink) { navLink.classList.remove('active'); });
+                tabContents.forEach(function(tab) { tab.classList.remove('active'); });
+
+                link.classList.add('active');
+
+                if (targetTab) { targetTab.classList.add('active'); }
+            });
+        });
     });
 </script>
 
