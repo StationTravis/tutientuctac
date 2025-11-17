@@ -1,0 +1,426 @@
+ /* Cài đặt chung & Theme */
+        body {
+            /* Dùng Noto Serif JP cho nội dung, Oswald cho tiêu đề */
+            font-family: 'Noto Serif JP', serif, Arial, sans-serif; 
+            background-color: #1a1a2e; /* Màu nền dự phòng nếu ảnh không tải được */
+            color: #e0e0e0; /* Màu chữ mặc định */
+            margin: 0;
+            padding: 0 5%; /* Yêu cầu nhích vào 5% */
+            box-sizing: border-box;
+            min-height: 100vh; /* Đảm bảo body đủ cao để ảnh nền hiển thị */
+
+            /* == SỬ DỤNG ẢNH NỀN CỦA MÀY == */
+            background-image: url('../IMG/background.png'); 
+            background-size: cover;       
+            background-position: center;  
+            background-repeat: no-repeat; 
+            background-attachment: fixed; 
+        }
+
+        a {
+            color: #92c4ff; /* Màu link nhạt hơn, phù hợp với nền */
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        /* == Header (phần logo) == */
+        .header {
+            text-align: center;
+            padding: 30px 0 2px 0; /* Tăng padding bottom để tạo khoảng cách */
+        }
+
+        .header img {
+            max-width: 250px; /* Tăng kích thước logo */
+            height: auto;
+            filter: drop-shadow(0 0 18px rgba(0, 255, 255, 0.7)) drop-shadow(0 0 35px rgba(0, 255, 255, 0.5)); 
+        }
+
+        /* Layout chính 3 cột */
+        .container {
+            display: flex;
+            max-width: 1600px;
+            margin: 20px auto;
+            gap: 25px; /* Khoảng cách giữa các cột */
+        }
+
+        /* CSS chung cho các khối có nền trong suốt và hiệu ứng blur */
+        .glass-panel {
+            background-color: rgba(31, 31, 58, 0.45); /* Nền hơi trong suốt, giảm opacity một chút */
+            border-radius: 12px; /* Bo tròn hơn một chút */
+            backdrop-filter: blur(8px); /* Tăng độ mờ nền bên dưới */
+            border: 1px solid rgba(255, 255, 255, 0.1); /* Viền mờ */
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4); /* Shadow mạnh hơn */
+            padding: 25px; /* Padding mặc định */
+            transition: transform 0.2s ease-out, box-shadow 0.2s ease-out;
+        }
+        .glass-panel:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.5);
+        }
+
+        /* Cột Trái - Sidebar Left */
+        .sidebar-left {
+            flex: 1; 
+            height: fit-content; 
+        }
+
+        .sidebar-left h3 {
+            color: #ffffff;
+            border-bottom: 2px solid #ce4233; /* Màu đỏ đậm hơn một chút */
+            padding-bottom: 10px;
+            margin-top: 0;
+            font-size: 1.8em; /* Tăng cỡ chữ tiêu đề */
+            text-shadow: 1px 1px 4px rgba(0,0,0,0.7); /* Tăng bóng chữ */
+            font-family: 'Oswald', sans-serif; /* Dùng font Oswald cho tiêu đề */
+            text-align: center;
+        }
+
+        .main-nav ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .main-nav li a {
+            display: block;
+            padding: 15px 20px;
+            color: #f0f0f0;
+            background-color: rgba(42, 42, 74, 0.5); /* Nền hơi trong suốt */
+            margin-bottom: 10px;
+            border-radius: 8px; /* Bo tròn hơn */
+            font-weight: bold;
+            transition: background-color 0.3s, transform 0.2s, box-shadow 0.2s;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+        }
+
+        .main-nav li a:hover {
+            background-color: rgba(58, 58, 90, 0.6);
+            transform: translateX(8px); /* Hiệu ứng di chuyển khi hover */
+            box-shadow: 0 0 15px rgba(255,255,255,0.1);
+            text-decoration: none;
+        }
+
+        /* Class 'active' - Đã giảm độ chói màu đỏ */
+        .main-nav li a.active {
+            background-color: #a8362a; /* Màu đỏ đậm hơn, ít chói hơn */
+            color: #ffffff;
+            box-shadow: 0 0 18px rgba(168, 54, 42, 0.7); /* Shadow màu đỏ đậm */
+            transform: translateX(5px);
+        }
+
+        /* Cột Giữa - Main Content */
+        .main-content {
+            flex: 3; 
+            padding: 30px;
+        }
+
+        .main-content h2 {
+            color: #ffffff;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+            padding-bottom: 15px;
+            margin-bottom: 25px;
+            font-size: 2.2em; /* Tăng cỡ chữ tiêu đề */
+            text-shadow: 1px 1px 4px rgba(0,0,0,0.7);
+            font-family: 'Oswald', sans-serif; /* Dùng font Oswald cho tiêu đề */
+            text-align: center;
+        }
+
+        .tab-content {
+            display: none; 
+            line-height: 1.8; /* Tăng khoảng cách dòng */
+        }
+        .tab-content p {
+            margin-bottom: 15px;
+            text-shadow: 0.5px 0.5px 1px rgba(0,0,0,0.3);
+        }
+
+        .tab-content.active {
+            display: block; 
+        }
+
+        /* Nội dung tab Liên Hệ */
+        .contact-info strong {
+            color: #ffffff;
+            min-width: 100px;
+            display: inline-block;
+        }
+
+        .contact-button {
+            display: inline-block;
+            padding: 8px 15px;
+            color: #ffffff;
+            font-weight: bold;
+            border-radius: 5px;
+            margin-left: 10px;
+            font-size: 0.9em;
+            transition: opacity 0.3s, transform 0.2s, box-shadow 0.2s;
+            text-shadow: 1px 1px 1px rgba(0,0,0,0.3);
+        }
+        .contact-button:hover {
+            opacity: 0.9;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            text-decoration: none;
+        }
+
+        .zalo-button { background-color: #0068ff; }
+        .fb-button { background-color: #1877f2; }
+        .gmail-button { background-color: #db4437; }
+
+
+        /* Cột Phải - Sidebar Right */
+        .sidebar-right {
+            flex: 1.2; 
+            height: fit-content;
+        }
+
+        /* Nút Chơi Game - Đã giảm độ chói màu đỏ */
+        .play-game-button {
+            width: 100%;
+            max-width: 100px; 
+            height: 100px;
+            background-color: #a8362a; /* Màu đỏ đậm, ít chói hơn */
+            border-radius: 50%; 
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 30px auto;
+            border: 5px solid #d45f50; /* Viền đỏ sáng hơn một chút */
+            box-shadow: 0 0 30px rgba(168, 54, 42, 0.8), inset 0 0 15px rgba(255,255,255,0.2); /* Thêm inset shadow */
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+        }
+        .play-game-button:hover {
+            transform: scale(1.1); 
+            box-shadow: 0 0 45px rgba(168, 54, 42, 1), inset 0 0 20px rgba(255,255,255,0.3);
+        }
+
+        .play-game-button a {
+            color: #ffffff;
+            font-size: 38px; /* Chữ to hơn nữa */
+            font-weight: bold;
+            text-align: center;
+            line-height: 1.2;
+            text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.7); /* Bóng chữ mạnh hơn */
+            font-family: 'Oswald', sans-serif; /* Dùng font Oswald */
+        }
+        .play-game-button a:hover {
+            text-decoration: none;
+        }
+		.play-game-button a img {
+			width: 250px;  /* <--- Kích thước chiều ngang của logo/icon */
+			height: 250px; /* <--- Kích thước chiều dọc của logo/icon */
+		}
+
+        /* Khung Đăng Nhập */
+        .login-form {
+            padding: 25px;
+        }
+
+        .login-form h4 {
+            text-align: center;
+            color: #ffffff;
+            font-size: 2em; /* To hơn */
+            margin-top: 0;
+            margin-bottom: 25px;
+            text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.7);
+            font-family: 'Oswald', sans-serif; /* Dùng font Oswald */
+        }
+
+        .login-form label {
+            display: block;
+            margin-bottom: 8px; 
+            color: #d0d0d0;
+            font-size: 1.05em;
+        }
+
+        .login-form input[type="text"],
+        .login-form input[type="password"] {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 18px; 
+            border: 1px solid rgba(58, 58, 90, 0.8); 
+            background-color: rgba(42, 42, 74, 0.7); /* Nền input hơi trong suốt */
+            color: #ffffff;
+            border-radius: 5px;
+            box-sizing: border-box; 
+            transition: border-color 0.3s, box-shadow 0.3s;
+            text-shadow: 0.5px 0.5px 1px rgba(0,0,0,0.3);
+        }
+        .login-form input[type="text"]:focus,
+        .login-form input[type="password"]:focus {
+            border-color: #a8362a; /* Màu viền khi focus (đã giảm chói) */
+            box-shadow: 0 0 8px rgba(168, 54, 42, 0.6);
+            outline: none;
+        }
+
+        /* Nút Đăng Nhập - Đã giảm độ chói màu đỏ */
+        .login-form button {
+            width: 100%;
+            padding: 14px; 
+            background-color: #a8362a; /* Màu đỏ đậm, ít chói hơn */
+            color: #ffffff;
+            border: none;
+            border-radius: 5px;
+            font-size: 1.2em; 
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.2s, box-shadow 0.2s;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+        }
+        .login-form button:hover {
+            background-color: #8c2a20; /* Màu đỏ tối hơn khi hover */
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.4);
+        }
+
+        .login-links {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 18px; 
+            font-size: 1em;
+        }
+        .login-links a {
+            color: #b0b0b0; 
+            transition: color 0.3s;
+            text-shadow: 0.5px 0.5px 1px rgba(0,0,0,0.2);
+        }
+        .login-links a:hover {
+            color: #ffffff;
+        }
+/* ========================================= */
+/* == Tối Ưu Cho Điện Thoại (MEDIA QUERIES) == */
+/* ========================================= */
+
+/* Áp dụng cho màn hình có chiều rộng tối đa 992px (Tablet, Mobile) */
+@media (max-width: 992px) {
+    
+    /* Điều chỉnh padding tổng thể của body trên mobile */
+    body {
+        padding: 0 10px;
+    }
+
+    /* Chuyển container từ 3 cột sang 1 cột xếp dọc */
+    .container {
+        flex-direction: column;
+        gap: 20px; /* Giảm khoảng cách giữa các khối */
+        margin: 10px auto;
+    }
+
+    /* Tối ưu header */
+	.header img {
+		max-width: 75px; 
+		height: auto;
+		filter: drop-shadow(0 0 18px rgba(0, 255, 255, 0.7)) drop-shadow(0 0 35px rgba(0, 255, 255, 0.5)); 
+	}
+    /* Reset flex properties để các khối chiếm 100% chiều rộng */
+    .sidebar-left, 
+    .main-content, 
+    .sidebar-right {
+        flex: 1 1 100%;
+    }
+    
+    /* THAY ĐỔI THỨ TỰ: Đẩy Cột Phải (Nút Chơi Game + Đăng Nhập) lên trên cùng */
+    .sidebar-right {
+        order: -1; 
+    }
+    
+    /* Sidebar trái và Main Content ở giữa */
+    .sidebar-left {
+        order: 0;
+    }
+
+    .main-content {
+        order: 1;
+    }
+
+    /* Đảm bảo nút Chơi Game vẫn hiển thị hợp lý */
+    .play-game-button {
+        max-width: 180px; 
+        height: 180px;
+        margin: 0 auto 20px auto; /* Căn giữa và giảm khoảng cách */
+    }
+
+    .play-game-button a {
+        font-size: 30px; /* Giảm cỡ chữ nút Chơi Game */
+    }
+
+    /* Tiêu đề trên mobile nên nhỏ lại chút */
+    .sidebar-left h3, .main-content h2, .login-form h4 {
+        font-size: 1.5em;
+    }
+}
+
+/* Áp dụng cho màn hình rất nhỏ (như iPhone SE) */
+@media (max-width: 480px) {
+    .play-game-button {
+        max-width: 140px; 
+        height: 140px;
+    }
+
+    .play-game-button a {
+        font-size: 26px;
+    }
+    
+    /* Giảm padding của các khối nội dung trên màn hình cực nhỏ */
+    .glass-panel {
+        padding: 15px;
+    }
+}
+
+/* == POST-LOGIN MENU STYLES == */
+.user-menu {
+    /* Khối menu đã dùng sẵn glass-panel */
+    padding: 25px; 
+    text-align: center;
+    /* Ẩn ban đầu, chỉ hiện ra bằng JS */
+    display: none; 
+}
+
+.user-menu h4 {
+    margin-top: 0;
+    margin-bottom: 25px;
+    font-size: 1.2em;
+    color: #FFFF99; /* Màu vàng kim loại */
+    text-shadow: 1px 1px 3px rgba(0,0,0,0.8);
+    font-family: 'Oswald', sans-serif;
+}
+
+.user-nav ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0 0 20px 0;
+}
+
+.user-nav li a {
+    display: block;
+    padding: 15px 20px;
+    color: #f0f0f0;
+    background-color: rgba(42, 42, 74, 0.5);
+    margin-bottom: 10px;
+    border-radius: 8px; 
+    font-weight: bold;
+    transition: background-color 0.3s;
+}
+
+.user-nav li a:hover {
+    background-color: rgba(58, 58, 90, 0.6);
+}
+
+.logout-button {
+    width: 100%;
+    padding: 10px;
+    background-color: #8c2a20; /* Màu đỏ đậm */
+    color: #ffffff;
+    border: none;
+    border-radius: 5px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.logout-button:hover {
+    background-color: #5c1b14;
+}
