@@ -294,7 +294,84 @@
         .login-links a:hover {
             color: #ffffff;
         }
+/* ========================================= */
+/* == Tối Ưu Cho Điện Thoại (MEDIA QUERIES) == */
+/* ========================================= */
 
+/* Áp dụng cho màn hình có chiều rộng tối đa 992px (Tablet, Mobile) */
+@media (max-width: 992px) {
+    
+    /* Điều chỉnh padding tổng thể của body trên mobile */
+    body {
+        padding: 0 10px;
+    }
+
+    /* Chuyển container từ 3 cột sang 1 cột xếp dọc */
+    .container {
+        flex-direction: column;
+        gap: 20px; /* Giảm khoảng cách giữa các khối */
+        margin: 10px auto;
+    }
+
+    /* Tối ưu header */
+    .header img {
+        max-width: 70%; /* Giảm kích thước logo cho màn hình nhỏ */
+    }
+
+    /* Reset flex properties để các khối chiếm 100% chiều rộng */
+    .sidebar-left, 
+    .main-content, 
+    .sidebar-right {
+        flex: 1 1 100%;
+    }
+    
+    /* THAY ĐỔI THỨ TỰ: Đẩy Cột Phải (Nút Chơi Game + Đăng Nhập) lên trên cùng */
+    .sidebar-right {
+        order: -1; 
+    }
+    
+    /* Sidebar trái và Main Content ở giữa */
+    .sidebar-left {
+        order: 0;
+    }
+
+    .main-content {
+        order: 1;
+    }
+
+    /* Đảm bảo nút Chơi Game vẫn hiển thị hợp lý */
+    .play-game-button {
+        max-width: 180px; 
+        height: 180px;
+        margin: 0 auto 20px auto; /* Căn giữa và giảm khoảng cách */
+    }
+
+    .play-game-button a {
+        font-size: 30px; /* Giảm cỡ chữ nút Chơi Game */
+    }
+
+    /* Tiêu đề trên mobile nên nhỏ lại chút */
+    .sidebar-left h3, .main-content h2, .login-form h4 {
+        font-size: 1.5em;
+    }
+}
+
+/* Áp dụng cho màn hình rất nhỏ (như iPhone SE) */
+@media (max-width: 480px) {
+    .play-game-button {
+        max-width: 140px; 
+        height: 140px;
+    }
+
+    .play-game-button a {
+        font-size: 26px;
+    }
+    
+    /* Giảm padding của các khối nội dung trên màn hình cực nhỏ */
+    .glass-panel {
+        padding: 15px;
+    }
+}
     </style>
 </head>
 <body>
