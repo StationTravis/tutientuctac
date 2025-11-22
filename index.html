@@ -147,7 +147,8 @@
             document.getElementById('username').value = '';
             document.getElementById('password').value = '';
             alert('✅ Đăng nhập thành công! Chào mừng Đạo Hữu!');
-            showUserMenu();
+            // Chuyển đến Loading.html sau khi đăng nhập thành công
+            window.location.href = 'Loading.html';
         }
 
         function handleLogout() {
