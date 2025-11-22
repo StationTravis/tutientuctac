@@ -186,9 +186,8 @@
         playGameButton.addEventListener('click', function(event) {
             event.preventDefault(); 
             
-            // Vì nút này chỉ hiện khi Đã Login nên chỉ cần chuyển trang
-            alert('Đang chuyển vào Game...');
-            window.location.href = mainGamePage; 
+            // Chuyển đến Loading.html khi bấm Play game
+            window.location.href = 'Loading.html'; 
         });
         
         // C. Xử lý nút Đăng Xuất
