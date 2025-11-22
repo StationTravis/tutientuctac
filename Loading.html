@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Khởi Tạo Thế Giới Tu Tiên</title>
+  <style>
+    body {
+      background-color: #0b0b0b;
+      color: #dcdcdc;
+      font-family: 'Courier New', monospace;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      overflow: hidden;
+    }
+    #loading {
+      text-align: center;
+      font-size: 1.1rem;
+      white-space: pre-line;
+      line-height: 1.6;
+    }
+    .fade {
+      opacity: 0;
+      transition: opacity 0.8s ease-in-out;
+    }
+    .show {
+      opacity: 1;
+    }
+  </style>
+</head>
+<body>
+  <div id="loading"></div>
+
+  <script>
+    const steps = [
+      "Khởi động Thiên Đạo...",
+      "Đang tụ linh khí...",
+      "Ghi nhận linh căn của ngươi...",
+      "Tạo dựng thế giới...",
+      "Hoàn tất.\nChuẩn bị đăng nhập..."
+    ];
+
+    const loadingDiv = document.getElementById("loading");
+
+    let index = 0;
+    function nextLine() {
+      if (index < steps.length) {
+        const p = document.createElement("p");
+        p.className = "fade";
+        p.textContent = steps[index++];
+        loadingDiv.appendChild(p);
+        setTimeout(() => p.classList.add("show"), 100);
+        setTimeout(nextLine, 1200);
+      } else {
+        setTimeout(() => {
+          window.location.href = "index.html"; // sang trang game chính
+        }, 1000);
+      }
+    }
+    nextLine();
+  </script>
+</body>
+</html>
