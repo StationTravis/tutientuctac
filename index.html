@@ -147,8 +147,7 @@
             document.getElementById('username').value = '';
             document.getElementById('password').value = '';
             alert('✅ Đăng nhập thành công! Chào mừng Đạo Hữu!');
-            // Chuyển đến Loading.html sau khi đăng nhập thành công
-            window.location.href = 'Loading.html';
+            showUserMenu();
         }
 
         function handleLogout() {
@@ -187,9 +186,8 @@
         playGameButton.addEventListener('click', function(event) {
             event.preventDefault(); 
             
-            // Vì nút này chỉ hiện khi Đã Login nên chỉ cần chuyển trang
-            alert('Đang chuyển vào Game...');
-            window.location.href = mainGamePage; 
+            // Chuyển đến Loading.html khi bấm Play game
+            window.location.href = 'Loading.html'; 
         });
         
         // C. Xử lý nút Đăng Xuất
